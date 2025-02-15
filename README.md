@@ -1,86 +1,93 @@
-# Charter - Ephemeral Network Resource Leasing __(Pre-testing stage)__
+# Charter - Ephemeral Network Resource Leasing *(Pre-Testing Stage)*
 
-> A tool for creating ephemeral ad hoc ports & IPs for testing and development.
+> A tool for creating ephemeral ad hoc ports and IPs for testing and development.
 
-## Usecase
+## Use Cases
 
-Instead of permanent configurations, **Charter** focuses on short-term setups, making it ideal for:
+Instead of relying on permanent configurations, **Charter** focuses on short-term network setups, making it ideal for:
 
-- Developers testing applications.
-- Engineers simulating constrained environments.
-- Teams deploying temporary services.
+- **Developers** testing applications that require temporary networking.
+- **Engineers** simulating constrained or ephemeral environments.
+- **Teams** deploying short-lived services without long-term configuration overhead.
 
 ## Features
 
-- **Automation**: Automates setup and teardown of network configurations.
-- **Ephemeral Nature**: Focuses on short-lived setups to reduce resource waste and improve security.
-- **Testing Made Easy**: Simplifies testing workflows that involve networking, such as API endpoint tests under various conditions.
-- **Cloud Integration**: Works locally and integrates with cloud services for temporary resource allocation.
-- **Secure by Default**: Automatically cleans up after lease expiration, closing ports, and removing IP assignments.
+- **Automated Setup & Teardown** – Charter automates the creation and cleanup of network resources.
+- **Ephemeral Networking** – Resources expire automatically, reducing security risks and resource waste.
+- **Simplified Testing** – Ideal for API testing, temporary port forwarding, and simulated network conditions.
+- **Cloud & Local Integration** – Works on local machines and supports cloud-based temporary resource allocation.
+- **Security by Default** – Ensures proper cleanup by closing ports and removing IP assignments after expiration.
 
-## Installation and Build
+## Installation & Build
 
 Clone the repository and navigate into it:
+
 ```bash
-git clone https://github.com/DriftingOtter/Charter.git 
-cd Charter
+git clone https://github.com/driftingotter/charter.git
+cd charter
 ```
 
 Build the project:
+
 ```bash
 cargo build --release
 ```
 
 ### Optional: Move Binary to Local Binaries Folder
 
-To access `charter` without specifying the binary path, move it to your local binaries folder:
+To access Charter without specifying the binary path, move it to your local binaries folder:
+
 ```bash
 cp target/release/charter ~/.local/bin
 ```
 
-Ensure `~/.local/bin` is in your `PATH`. You can add it by updating your shell configuration file (`~/.bashrc` or `~/.zshrc`):
+Ensure `~/.local/bin` is in your PATH. Add it by updating your shell configuration file (`~/.bashrc` or `~/.zshrc`):
+
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
-## Synopsis
+## Usage
 
-### Additional Arguments
+Charter accepts various flags and options to configure temporary network resources. Below are sample use cases.
 
-Charter accepts various flags and options to configure temporary network resources. Below are some of the sample commands.
+### Example Commands
 
-### Sample Use Cases
+1. **Lease a Temporary Public IP**
 
-1. **Temporary Public IP for Testing**:
    ```bash
    charter ip --duration 1h --provider aws
    ```
-   _(Lease a public IP from AWS for 1 hour.)_
+   *(Leases a public IP from AWS for 1 hour.)*
 
-2. **Open a Port for Limited Time**:
+2. **Open a Port for a Limited Time**
+
    ```bash
    charter port 8080 --duration 30m
    ```
-   _(Open port 8080 for 30 minutes, then automatically close it.)_
+   *(Opens port 8080 for 30 minutes, then automatically closes it.)*
 
-3. **Simulate a Slow Connection**:
+3. **Simulate a Slow Connection**
+
    ```bash
    charter throttle --bandwidth 100kbps --process myapp
    ```
-   _(Throttle the `myapp` process to 100 kbps bandwidth.)_
+   *(Throttles the `myapp` process to 100 kbps bandwidth.)*
 
-4. **Create an Ephemeral VPN**:
+4. **Create an Ephemeral VPN Tunnel**
+
    ```bash
    charter vpn --duration 2h --config vpn.conf
    ```
-   _(Spin up a VPN tunnel using the provided configuration for 2 hours.)_
+   *(Creates a VPN tunnel using the provided configuration for 2 hours.)*
 
 ## Authors
 
-- Daksh Kaul // DriftingOtter 🦦
+- **Daksh Kaul** *(driftingotter 🦦)*
 
 ## Citations
 
-For port creation code:
-- Jackson, Elliot. "How to Find an Available TCP Port in Rust." Elliot Jackson's Blog, 25 July 2017, https://elliotekj.com/posts/2017/07/25/find-available-tcp-port-rust.
+For port creation logic:
+- Jackson, Elliot. *"How to Find an Available TCP Port in Rust."* Elliot Jackson's Blog, 25 July 2017, [https://elliotekj.com/posts/2017/07/25/find-available-tcp-port-rust](https://elliotekj.com/posts/2017/07/25/find-available-tcp-port-rust).
+
 
